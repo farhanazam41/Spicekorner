@@ -1,0 +1,1 @@
+export const KitchenRed = "#f44336"; 

@@ -1,11 +1,12 @@
 import React from 'react';
 import {createGlobalStyle } from 'styled-components';
-
+import Navbar from './Navbar/Navbar';
+import {Title} from './Styles/title'; 
 
 const GlobalStyle = createGlobalStyle`
 
 body {
-
+  margin: 0p;
   font-family: 'Open Sans', sans-serif;
 
 }
@@ -22,7 +23,7 @@ function App() {
     
     <>
       <GlobalStyle/>
-      <h2>Spice Korner</h2>
+      <Navbar/>
       <div>Welcopme</div>
       
     </>
