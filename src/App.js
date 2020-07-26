@@ -2,6 +2,7 @@ import React from 'react';
 import {createGlobalStyle } from 'styled-components';
 import Navbar from './Navbar/Navbar';
 import {Title} from './Styles/title'; 
+import {Banner} from './Banner/banner';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -24,6 +25,7 @@ function App() {
     <>
       <GlobalStyle/>
       <Navbar/>
+      <Banner/>
       <div>Welcopme</div>
       
     </>
