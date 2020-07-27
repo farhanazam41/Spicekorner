@@ -3,6 +3,7 @@ import {createGlobalStyle } from 'styled-components';
 import Navbar from './Navbar/Navbar';
 import {Title} from './Styles/title'; 
 import {Banner} from './Banner/banner';
+import {Menu} from './Menu/Menu';
 
 const GlobalStyle = createGlobalStyle`
 
@@ -26,6 +27,7 @@ function App() {
       <GlobalStyle/>
       <Navbar/>
       <Banner/>
+      <Menu/>
       <div>Welcopme</div>
       
     </>
