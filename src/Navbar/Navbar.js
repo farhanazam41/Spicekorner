@@ -5,7 +5,7 @@ import {Title} from '../Styles/title';
 
 const NavbarStyled = styled.div`
  background-color : ${KitchenRed};
- padding: 10px;
+ padding: 20px;
  position:fixed;
  width:100%;
  z-index: 999;
@@ -24,7 +24,10 @@ text-shadow: 1px 1px 4px #480808;
 
         <NavbarStyled>
             <Logo>
-                SpiceKorner 🍋🍋
+                SpiceKorner{" "}
+                <span role="img" aria-label="lemons" >
+                    🍋
+                </span>
             </Logo>
         </NavbarStyled>
     );
