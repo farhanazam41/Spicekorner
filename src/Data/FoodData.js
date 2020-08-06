@@ -66,9 +66,9 @@ export const foodItems = [
         section: 'Pakistani Food',
         price: 20
     },{
-        name: 'Fried Fish',
+        name: 'Pizza',
         img: '/img/Friedfish.jpg',
-        section: 'Pakistani Food',
+        section: 'Pizza',
         price: 20
     },{
         name: 'Fried Fish',
