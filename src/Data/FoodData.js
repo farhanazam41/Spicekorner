@@ -75,6 +75,12 @@ export const foodItems = [
         img: '/img/Friedfish.jpg',
         section: 'Pakistani Food',
         price: 20
+    },{
+        price: 1,
+        name: 'Soda',
+        section: 'Drinks',
+        choices: ['Coke', 'Pepsi','Fanta','Sprite']
+
     }
 
 ];

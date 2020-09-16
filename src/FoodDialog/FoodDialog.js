@@ -8,6 +8,9 @@ import { QuantityInput } from './QuantityInput';
 import { useQuantity } from '../Hooks/useQuantity';
 import {Toppings} from './Toppings';
 import { useToppings }  from '../Hooks/useToppings';
+import { useChoice }  from '../Hooks/useChoice';
+import {Choices} from './Choices'
+
 
 const Dialog = styled.div`
 
@@ -61,6 +64,12 @@ text-align: center;
 width: 200px;
 cursor: pointer;
 background-color: ${KitchenRed};
+${({disabled}) => disabled && 
+`  
+opacity: 0.5;
+background-color: grey;
+pointer-events : none;
+`}
 
 `;
 
@@ -68,7 +77,8 @@ const DialogBanner = styled.div`
 
 min-height: 200px;
 margin-bottom: 20px;
-${({img}) => `background-image: url(${img});`}
+${({img}) => ( img ?  
+`background-image: url(${img});` : `min-height: 75px;`)}
 background-position: center;
 background-size: cover;
 `;
@@ -78,6 +88,7 @@ const DialogBaneerName = styled(FoodLabel)`
  top: 100px;
  font-size: 30px;
  padding: 5px 40px;
+ top : ${ ({ img }) => (img ? `100px` : `20px` )} ;
 
 `
 
@@ -95,7 +106,10 @@ function hasToppings(food){
 function FoodDialogContainer({openFood , setOpenFood, setOrders, orders }){
     const quantity = useQuantity(openFood && openFood.quantity);
     const toppings = useToppings(openFood.toppings);
+    const choiceRadio = useChoice(openFood.choice);
+    const isEditing = openFood.index > -1;
 
+    
 
     function close() {
      setOpenFood();
@@ -105,8 +119,16 @@ function FoodDialogContainer({openFood , setOpenFood, setOrders, orders }){
     const order = {
      ...openFood,
      quantity: quantity.value,
-     toppings: toppings.toppings
+     toppings: toppings.toppings,
+     choice: choiceRadio.value
     };
+ 
+    function editOrder(newOrder){
+        const newOrders = [...orders];
+        newOrders[openFood.index] = order;
+        setOrders(newOrders);
+        close();
+        }
 
     function addToOrder(){
         setOrders([...orders, order]);
@@ -123,14 +145,18 @@ function FoodDialogContainer({openFood , setOpenFood, setOrders, orders }){
         </DialogBanner>
         <DialogContent>
         <QuantityInput  quantity={quantity} />
-        { hasToppings(openFood) && <> 
+        { hasToppings(openFood) && 
+          (<> 
             <h3>Would you like toppings ?</h3>
-        <Toppings {...toppings}  />
-        </>}
+            <Toppings {...toppings}  />
+          </>
+          )
+    }
+        { openFood.choices &&  <Choices openFood={openFood}  choiceRadio ={choiceRadio} />}
         </DialogContent>
         <DialogFooter >
-        <ConfirmButton onClick={addToOrder}>
-        Add to order: {formatPrice(getPrice(order))}
+        <ConfirmButton onClick={isEditing ? editOrder : addToOrder} disabled ={openFood.choices && !choiceRadio.value}>
+        {isEditing ? `Update order` : `Add to order:`} {formatPrice(getPrice(order))}
         </ConfirmButton>
         </DialogFooter>
          </Dialog>
